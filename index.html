@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background: #fff;
+        }
+
+        .centered {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: auto;
+            padding: 20px;
+            color: #292929;
+            text-align: center;
+        }
+
+        img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: auto;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Loading</h1>
+
+    <div class="centered">
+
+
+        <img id="shape1" src="./3x/Asset 3@3x.png" class="absolute"></img>
+        <img id="shape2" src="./3x/Asset 4@3x.png" class="absolute"></img>
+        <img id="shape3" src="./3x/Asset 5@3x.png" class="absolute"></img>
+
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#shape1').css({ opacity: 0 });
+            $('#shape2').css({ opacity: 0 });
+            $('#shape3').css({ opacity: 0 });
+
+
+            setInterval(animateInit, 2500)
+
+
+        });
+
+        function animateInit() {
+            var wait = 200;
+
+            $.when(animateFade('1', wait + 200)).then(animateFade('0', wait + 400));
+        }
+
+
+        function animateFade(opacityVal, wait) {
+            $("#shape1").animate({
+                opacity: opacityVal
+            }, {
+                    duration: wait,
+                    specialEasing: {
+                        opacity: "linear"
+                    },
+                    complete: function () {
+                        $("#shape2").animate({
+                            opacity: opacityVal
+                        }, {
+                                duration: wait,
+                                specialEasing: {
+                                    opacity: "linear"
+                                },
+                                complete: function () {
+                                    $("#shape3").animate({
+                                        opacity: opacityVal
+                                    }, {
+                                            duration: wait,
+                                            specialEasing: {
+                                                opacity: "linear"
+                                            },
+                                            complete: function () {
+
+                                            }
+                                        });
+                                }
+                            });
+                    }
+                });
+        }
+    </script>
+
+</body>
+
+</html>
